@@ -9,11 +9,13 @@ import javax.faces.context.FacesContext;
 
 import com.tuukul.modelo.User;
 import com.tuukul.modelo.Utility;
+import java.util.Random;
 
 @ManagedBean
 @RequestScoped
 public class RegisterController {
 
+    private Random rn = new Random();   
     private User user = new User();
     private Utility u = new Utility();
 
