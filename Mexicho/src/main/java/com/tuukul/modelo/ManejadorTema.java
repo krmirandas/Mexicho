@@ -23,10 +23,8 @@ public class ManejadorTema {
     
         /**Método generaId
      * Regresa un nuevo id para un nuevo tema agregado.
-     * Id =  Número de elementos en la lista + 1.
+     * Para evitar problemas con los índices, tomamos el máximo y le sumamos uno.
      * @return int 
-     * -> id para el nuevo tema registrado
-     * -> 0 cuando hay un error
      */
     public int generaId(){
         List<Tema> obj = null;
@@ -38,7 +36,13 @@ public class ManejadorTema {
             Query query = sessionObj.createQuery(hql);
             obj = (List<Tema>)query.list();
             sessionObj.getTransaction().commit();
-            return obj.size()+1;
+            int max = 0;
+            for(int i=0; i<obj.size(); i++){//iteramos sobre los id_tema
+                int num = obj.get(i).getId_tema();
+                if(num>max)//Si el num es mayor al max  actualizamos el max
+                    max = num;
+            }
+            return max+1;//Este será el id del nnuevo tema
         }catch(Exception sqlException){
             if (null != sessionObj.getTransaction()) {
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
@@ -52,16 +56,20 @@ public class ManejadorTema {
         } 
         return 0;
     }
-
+    
+    /**Método save
+     * Guardamos el nuevo tema.
+     * @param tema 
+     */
     public void save(Tema tema) {
         try {
             sessionObj = HibernateUtil.getSessionFactory().openSession();
             sessionObj.beginTransaction();
-            sessionObj.save(tema);
+            sessionObj.save(tema);//Guardamos el tema
             sessionObj.getTransaction().commit();
         } catch (Exception sqlException) {
             if (null != sessionObj.getTransaction()) {
-                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                System.out.println("\n.......Ocurrió un error.......");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
@@ -73,23 +81,59 @@ public class ManejadorTema {
     }
     
     
-
+    /**Método delete
+     * Elimina un tema. (Se elimina con el título)
+     * @param tema 
+     */
     public void delete(Tema tema){
-        try {
+        
+        try{
+            String titulo= tema.getTitulo_tema();
             sessionObj = HibernateUtil.getSessionFactory().openSession();
             sessionObj.beginTransaction();
-            sessionObj.delete(tema);
+            String hql = "delete Tema t WHERE t.titulo_tema= :titulo";
+            sessionObj.createQuery(hql).setString("titulo",titulo).executeUpdate();
             sessionObj.getTransaction().commit();
-        } catch (Exception sqlException) {
+        }catch(Exception sqlException){
+            if (null != sessionObj.getTransaction()) {
+                System.out.println("\n.......Ocurrió un error.......");
+                sessionObj.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        }finally{
+            if (sessionObj != null) {
+                sessionObj.close();
+            }            
+        } 
+    }
+    
+    /**Método buscar
+     * Busca un tema por el título e imprime su información.
+     * @param tema
+     * @return 
+     */
+    public Tema buscar(Tema tema){
+        
+        try{
+            String titulo= tema.getTitulo_tema();
+            sessionObj = HibernateUtil.getSessionFactory().openSession();
+            sessionObj.beginTransaction();
+            String hql = " FROM Tema t WHERE t.titulo_tema= :titulo";
+            Query query = sessionObj.createQuery(hql).setString("titulo",titulo);
+            Tema t = (Tema)query.uniqueResult();
+            sessionObj.getTransaction().commit();
+            return t;
+        }catch(Exception sqlException){
             if (null != sessionObj.getTransaction()) {
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
-        } finally {
+        }finally{
             if (sessionObj != null) {
                 sessionObj.close();
-            }
-        }
+            }            
+        } 
+        return null;
     }
 }
