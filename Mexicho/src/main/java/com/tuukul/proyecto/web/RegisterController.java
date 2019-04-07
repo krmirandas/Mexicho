@@ -14,23 +14,21 @@ import java.util.Random;
 @ManagedBean
 @RequestScoped
 public class RegisterController {
-
-    private Random rn = new Random();   
+    private Random rn = new Random();
     private User user = new User();
     private Utility u = new Utility();
 
+    public RegisterController() {
+        FacesContext.getCurrentInstance()
+                .getViewRoot()
+                .setLocale(new Locale("es-Mx"));
+    }
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public RegisterController() {
-        FacesContext.getCurrentInstance()
-                .getViewRoot()
-                .setLocale(new Locale("es-Mx"));
     }
 
     public String addUser() {
@@ -44,9 +42,52 @@ public class RegisterController {
                     .addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Felicidades, el registro se ha realizado correctamente", ""));
-            u.save(user);
+	    user.setId_usuario(u.generaId());
+	    u.save(user);
             user = null;
         }
         return null;
     }
+
+    public String addInformador(){        
+    user.setContrasena(generaContrasenia());   
+        if (!correoValido(user.getCorreo())) {
+            FacesContext.getCurrentInstance()
+                    .addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Fallo de registro: Correo invalido", ""));
+        } else {
+            FacesContext.getCurrentInstance()
+                    .addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                    "Felicidades, el registro se ha realizado correctamente", ""));
+	    user.setId_usuario(u.generaId());
+            u.save(user);
+            user = null;
+        }
+        return null;	
+    }
+    public String generaContrasenia(){
+	String[] total = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0"};
+	String contrasenia = new String();
+	int n = 0;
+	for (int i = 0; i<8; i++){	    
+	    n=rn.nextInt(total.length);
+            contrasenia += total[n];
+        }
+	return contrasenia;
+    }
+
+    public boolean correoValido(String correoE){
+	return correoE.contains("@");
+    }
+    public void eliminarUsuario(){
+        u.delete(user);
+        FacesContext.getCurrentInstance()
+                .addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                "El usuario se eliminó con éxito", ""));
+
+    }      
+
 }
