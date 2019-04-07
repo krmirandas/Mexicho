@@ -10,7 +10,7 @@ CREATE TABLE usuarios.usuario(
     id_usuario integer NOT NULL,
     nombre varchar NOT NULL,
     correo varchar NOT NULL,
-    contraseña varchar NOT NULL,
+    contrasena varchar NOT NULL,
     rol varchar NOT NULL,
     url_imagen varchar, 
     CONSTRAINT "PK_usuario" PRIMARY KEY (id_usuario));

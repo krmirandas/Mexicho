@@ -1,5 +1,6 @@
 package com.tuukul.modelo;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +11,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(catalog = "test", schema = "datos", name = "user")
-public class User {
+@Table(catalog = "mexicho", schema = "usuarios", name = "usuario")
+public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private int id;
+    @Column(name = "id_usuario")
+    private int id_usuario;
 
     @Column(name = "nombre")
     private String nombre;
@@ -27,16 +26,22 @@ public class User {
 
     @Column(name = "contrasena")
     private String contrasena;
+    
+    @Column(name = "rol")
+    private String rol;
+    
+    @Column(name = "url_imagen")
+    private String url_imagen;
 
     @Transient
     private String confirmaContrasena;
 
-    public int getId() {
-        return id;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombre() {
@@ -61,6 +66,22 @@ public class User {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getRol() {
+        return correo;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
     }
 
     public String getConfirmaContrasena() {
