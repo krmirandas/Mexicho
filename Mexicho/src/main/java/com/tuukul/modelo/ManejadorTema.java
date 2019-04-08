@@ -42,7 +42,7 @@ public class ManejadorTema {
                 if(num>max)//Si el num es mayor al max  actualizamos el max
                     max = num;
             }
-            return max+1;//Este será el id del nnuevo tema
+            return max+1;//Este será el id del nuevo tema
         }catch(Exception sqlException){
             if (null != sessionObj.getTransaction()) {
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");
