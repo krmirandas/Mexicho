@@ -10,17 +10,21 @@ import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import com.tuukul.modelo.Tema;
 import com.tuukul.modelo.ManejadorTema;
+
 /**
  *
  * @author coronado
  */
 @ManagedBean
 @RequestScoped
+
 public class ControladorTema {
+    @ManagedProperty(value= "#{buscarTema}")
     private Tema tema = new Tema();//objeto Tema
     private ManejadorTema m_tema = new ManejadorTema();//objeto ManejadorTema
     
@@ -66,18 +70,17 @@ public class ControladorTema {
                                 "El tema se eliminó con éxito", ""));
     } 
     
-    /**Método getBuscarTema()
-     * 
-     * @return 
-     */
-    public String getBuscarTema(){ 
+
+    
+    public void buscarTema(){ 
         FacesContext.getCurrentInstance()
                 .addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO,
                                 "Buscando el tema...", ""));
         Tema t = m_tema.buscar(tema);
-        String resultado = "<h1>"+t.getTitulo_tema()+"</h1>";
-        return resultado;
+        
+        System.out.println(t.getTitulo_tema()+"\n"+t.getDescripcion_tema()+"\n"+t.getColor_tema());
+        
     }
     
 
