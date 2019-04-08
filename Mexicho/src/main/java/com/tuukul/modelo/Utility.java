@@ -20,11 +20,17 @@ public class Utility {
 
         try{
             sessionObj.beginTransaction();
-            String hql = "FROM Usuario";
+            String hql = "FROM usuarios.usuario";
             Query query = sessionObj.createQuery(hql);
             obj = (List<User>)query.list();
             sessionObj.getTransaction().commit();
-            return obj.size()+1;
+            int max = 0;
+            for(int i=0; i<obj.size(); i++){//iteramos sobre los id_usuario
+                int num = obj.get(i).getId_usuario();
+                if(num>max)//Si el num es mayor al max  actualizamos el max
+                    max = num;
+            }
+	    return max+1;//Este será el id del nuevo usuario
         }catch(Exception sqlException){
             if (null != sessionObj.getTransaction()) {
                 System.out.println("\n.......Transaction Is Being Rolled Back.......");

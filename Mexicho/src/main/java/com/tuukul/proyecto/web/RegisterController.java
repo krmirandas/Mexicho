@@ -43,14 +43,15 @@ public class RegisterController {
                             new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Felicidades, el registro se ha realizado correctamente", ""));
 	    user.setId_usuario(u.generaId());
+	    user.setRol("Comentarista");
+	    user.setUrl_imagen("Ninguna");
 	    u.save(user);
             user = null;
         }
         return null;
     }
 
-    public String addInformador(){        
-    user.setContrasena(generaContrasenia());   
+    public String addInformador(){           
         if (!correoValido(user.getCorreo())) {
             FacesContext.getCurrentInstance()
                     .addMessage(null,
@@ -61,7 +62,10 @@ public class RegisterController {
                     .addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Felicidades, el registro se ha realizado correctamente", ""));
+            user.setContrasena(generaContrasenia());
 	    user.setId_usuario(u.generaId());
+	    user.setRol("Informador");
+	    user.setUrl_imagen("Ninguna");
             u.save(user);
             user = null;
         }
