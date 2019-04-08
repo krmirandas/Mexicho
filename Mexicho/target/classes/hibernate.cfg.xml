@@ -14,5 +14,6 @@
     <!-- Mapping With Model Class Containing Annotations -->
     <property name="hibernate.connection.password">root</property>
     <mapping class="com.tuukul.modelo.User"/>
+    <mapping class="com.tuukul.modelo.Tema"/>
   </session-factory>
 </hibernate-configuration>

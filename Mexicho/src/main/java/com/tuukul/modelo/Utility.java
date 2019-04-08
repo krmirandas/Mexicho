@@ -20,7 +20,7 @@ public class Utility {
 
         try{
             sessionObj.beginTransaction();
-            String hql = "FROM usuarios.usuario";
+            String hql = "FROM User";
             Query query = sessionObj.createQuery(hql);
             obj = (List<User>)query.list();
             sessionObj.getTransaction().commit();
@@ -65,20 +65,22 @@ public class Utility {
     }
     public void delete(User usuario){
         try {
+	    String correo = usuario.getCorreo();
             sessionObj = HibernateUtil.getSessionFactory().openSession();
             sessionObj.beginTransaction();
-            sessionObj.delete(usuario);
-            sessionObj.getTransaction().commit();
-        } catch (Exception sqlException) {
+	    String hql = "delete User u WHERE u.correo= :correo";
+	    sessionObj.createQuery(hql).setString("correo",correo).executeUpdate();
+               sessionObj.getTransaction().commit();
+        }catch(Exception sqlException){
             if (null != sessionObj.getTransaction()) {
-                System.out.println("\n.......Transaction Is Being Rolled Back.......");
+                System.out.println("\n.......Ocurrió un error.......");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
-        } finally {
+        }finally{
             if (sessionObj != null) {
                 sessionObj.close();
-            }
+            }            
         }
     }
 
