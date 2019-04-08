@@ -33,34 +33,23 @@
                                      id="descripcion"
                                      size="40"/></td>
                 </tr>
-            </table>
                 <tr>
-                    
-                    <h:form>
-                        
-                        <h3>Color</h3>
-                        <center>
-                            <g:selectOneMenu value = "#{controladorTema.tema.color_tema}">
-                                <f:selectItem itemValue = "verde" itemLabel = "Verde"/>
-                                <f:selectItem itemValue = "azul" itemLabel = "Azul" />
-                                <f:selectItem itemValue = "amarillo" itemLabel = "Amarillo" />
-                                <f:selectItem itemValue = "morado" itemLabel = "Morado" />
-                                <f:selectItem itemValue = "cafe" itemLabel = "Café" />
-                                <f:selectItem itemValue = "lila" itemLabel = "Lila" />
-                            </g:selectOneMenu> 
-                        </center>
-                        
-                    </h:form>
-                    
-                    
-                                     
+                    <td>Color</td>
+                    <td><h:selectOneMenu value = "#{controladorTema.tema.color_tema}"> 
+                            <f:selectItem itemValue = "verde" itemLabel = "Verde"/>
+                            <f:selectItem itemValue = "azul" itemLabel = "Azul" />
+                            <f:selectItem itemValue = "amarillo" itemLabel = "Amarillo" />
+                            <f:selectItem itemValue = "morado" itemLabel = "Morado" />
+                            <f:selectItem itemValue = "cafe" itemLabel = "Café" />
+                            <f:selectItem itemValue = "lila" itemLabel = "Lila" /> 
+                        </h:selectOneMenu> 
+                    </td>
                 </tr>
-            <table>
                 <tr>
                     <td colspan="2" align="center">
                         <p:commandButton action="#{controladorTema.agregarTema}"
                                          value="Agregar"/>
-                        <p:commandButton value="Reset"
+                        <p:commandButton value="Cancelar"
                                          update="myForm"
                                          process="@this">
                             <p:resetInput target="myForm" />

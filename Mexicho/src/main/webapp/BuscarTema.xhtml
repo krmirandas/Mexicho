@@ -26,29 +26,17 @@
                                      size="40"/></td>
                 </tr>
             </table>
-                
-                <h:form>
-                    <h:commandButton value="Buscar">
-                        <f:ajax event="click" render="output"/>
-                    </h:commandButton>
-                    <br/>
-                    <br/>
-                    <h:outputText id="output" escape="false" value="#{controladorTema.buscarTema}" />
-                </h:form>
-            
-                <!--
                 <tr>
                     <td colspan="2" align="center">
                         <p:commandButton action="#{controladorTema.buscarTema}"
                                          value="Buscar"/>
-                        <p:commandButton value="Reset"
+                        <p:commandButton value="Cancelar"
                                          update="myForm"
                                          process="@this">
                             <p:resetInput target="myForm" />
                         </p:commandButton>
                     </td>
-                </tr>
-                -->        
+                </tr>    
         </h:form>
     </h:body>
 </html>
