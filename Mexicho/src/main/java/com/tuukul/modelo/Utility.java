@@ -20,7 +20,7 @@ public class Utility {
 
         try{
             sessionObj.beginTransaction();
-            String hql = "FROM usuarios.usuario";
+            String hql = "FROM Usuario";
             Query query = sessionObj.createQuery(hql);
             obj = (List<User>)query.list();
             sessionObj.getTransaction().commit();
