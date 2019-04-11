@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      <h:head>
+      <title>Mexicho</title>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no"/>
+      <h:outputStylesheet name="css/bootstrap.min.css"/>
+      <h:outputStylesheet name="css/styles.css"/>
+      <h:outputStylesheet name="css/bootstrap.min.css"/>
+      <script type="text/javascript" src="js/prefix.js"></script>
+    </h:head>
+    <h:body>
+    <div class="contenedor">
+      <header>
+        <div class="logo">
+          <a href="#">Mexicho</a>
+        </div>
+      </header>
+      <section class="main">
+        <div class="form">
+          <h1>INICIAR SESIÓN</h1>
+        </div>
+      
+      <div>
+        <h:form styleClass="form-horizontal">
+          <p:messages id="messages" autoUpdate="true" closable="true" />
+          <div class="form-group">
+            <h:outputLabel value="Correo Electronico" styleClass="control-label col-sm-5"/>
+            <div class="col-sm-10">
+              <p:inputText value="#{registerController.user.correo}" styleClass="form-control"
+                        placeholder="correo electronico"/>
+            </div>
+          </div> 
+          <div class="form-group">
+              <h:outputLabel value="Contraseña" styleClass="control-label col-sm-5"/>
+              <div class="col-sm-10">
+                <p:password value="#{registerController.user.contrasena}" styleClass="form-control"
+                        placeholder="contraseña"/>
+              </div>
+          </div> 
+          <div class="form-group">
+            <h:outputLabel value=""/>
+             <p:commandButton action="#{registerController.verificaDatos}" value="Iniciar Sesión">
+            </p:commandButton>
+          </div>
+        </h:form>
+        <div>
+            <p>¿Aún no tienes cuenta? <a href="registro.xhtml">Registrarte</a></p>
+          </div>
+      </div>
+      </section>
+    </div>
+  </h:body>
+</html>
+
+
+      
+        
+        
+          
+          
+          
+        
