@@ -44,6 +44,7 @@ public class RegisterController {
                                     "Felicidades, el registro se ha realizado correctamente", ""));
 	    user.setId_usuario(u.generaId());
 	    user.setRol("Comentarista");
+	    user.setUrl_imagen("Ninguna");
 	    u.save(user);
             user = null;
         }
@@ -64,11 +65,14 @@ public class RegisterController {
             user.setContrasena(generaContrasenia());
 	    user.setId_usuario(u.generaId());
 	    user.setRol("Informador");
+	    user.setUrl_imagen("Ninguna");
             u.save(user);
+           
             user = null;
         }
         return null;	
     }
+    
     public String generaContrasenia(){
 	String[] total = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0"};
 	String contrasenia = new String();
@@ -94,13 +98,23 @@ public class RegisterController {
     
     public String verificaDatos() throws Exception{
         Usuario us;
-        String resultado;
+        String resultado = "";
         try{
             us = u.verificaDatos(user);
             if(us != null){
-                FacesContext.getCurrentInstance().getExternalContext()
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getCurrentInstance().getExternalContext()
                         .getSessionMap().put("usuario", us);
-                resultado = "exito";
+                context.getExternalContext().getSessionMap()
+                        .put("rol", us.getRol());
+                System.out.println(us.getRol());
+                if(us.getRol().equals("Administrador")){
+                    resultado = "PerfilAdmin?faces-redirect=true";
+                }else if(us.getRol().equals("Comentarista")){
+                    resultado = "PerfilComent?faces-redirect=true";
+                }else if(us.getRol().equals("Informador")){
+                    resultado = "PerfilInfor?faces-redirect=true";
+                }
             }else{
                 resultado = "error";
             }
@@ -126,7 +140,7 @@ public class RegisterController {
     public String cerrarSesion(){
         FacesContext.getCurrentInstance().getExternalContext().
                 invalidateSession();
-        return "index";
+        return "iniciarSesion?faces-redirect=true";
     }
 
 }

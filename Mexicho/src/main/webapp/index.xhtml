@@ -4,28 +4,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-
   <h:head>
     <title>Mexicho</title>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no"/>
     <h:outputStylesheet name="css/bootstrap.min.css"/>
     <h:outputStylesheet name="css/styles.css"/>
-    <script src="http://maps.google.com/maps/api/js?key=MY_API_KEY" type="text/javascript"></script>
+    <script type="text/javascript" src="js/prefix.js"></script> 
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyB-C8m4jBuWD9BzzGPUfjHvfxqwKTCSRmksensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+
   </h:head>
   <h:body>
-   <div class="contenedor">
-   	<header>
-   		<div class="logo">
-   			<a href="#">MEXICHO</a>
-   		</div>
-   		<nav>
-   			<a href="iniciarSesion.xhtml">Iniciar Sesión</a>
-   		</nav>
-   	</header>
-   </div>
-   <main class="main">
-    <p:gmap center="41.381542, 2.122893" zoom="0" type="HYBRID" style="width:1000px;height:1000px"/>
-  </main>
+    <div class="contenedor">
+      <header>
+        <div class="logo">
+          <a href="#">Mexicho</a>
+        </div>
+        <nav>
+          <a href="iniciarSesion.xhtml">Iniciar Sesión</a>
+        </nav>
+      </header>
+      <section class="main">
+        <p:gmap center="23.363908, -102.632638" zoom="5" type="HYBRID" style="width:60%;height:600px" />
+      </section>
+      <aside>
+        <div class="buscador"></div>
+      </aside>
+    </div>
   </h:body>
 </html>

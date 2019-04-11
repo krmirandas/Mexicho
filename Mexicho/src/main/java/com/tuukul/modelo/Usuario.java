@@ -30,6 +30,8 @@ public class Usuario implements Serializable {
     @Column(name = "rol")
     private String rol;
     
+    @Column(name = "url_imagen")
+    private String url_imagen;
 
     @Transient
     private String confirmaContrasena;
@@ -67,11 +69,19 @@ public class Usuario implements Serializable {
     }
 
     public String getRol() {
-        return correo;
+        return rol;
     }
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
     }
 
     public String getConfirmaContrasena() {

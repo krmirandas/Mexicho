@@ -2,7 +2,7 @@
 
 
 *{
-	margin:0;
+	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
@@ -10,60 +10,68 @@
 .contenedor{
 	background: #ccc;
 	width: 90%;
+	max-width: 1000px;
 	margin: auto;
+
+	/*FLEX*/
+
+	flex-direction: row;
+	flex-wrap: wrap;
+
 }
-.logo a{
-  font-family: 'Cinzel', serif;
-  font-size: 51px;
-  color: #fff;
-  text-decoration: none;
+
+body{
+	background: #e9e9e9;
 }
 
 header{
 	background: #2c3e50;
 	width: 100%;
 	padding: 20px;
-
+	/*FLEX*/
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
 	flex-direction: row;
 	flex-wrap: wrap;
+
 }
 
-header nav a {
+header .logo{
+	color: #fff;
+	font-size: 70px;
+}
+
+header .logo a{
+	color: #fff;
+	text-decoration: none;
+}
+
+header nav a{
+	background: #c0392b;
 	color: #fff;
 	text-align: center;
 	text-decoration: none;
-	font-size: 17px;
 	padding: 10px;
-	border: 1px solid white;
+	display: inline-block;
+
+	flex-wrap: 1;
+
 }
 
 header nav a:hover{
-	background: #435C75;
-	text-decoration: none;
-	color: #fff;
+	background: #e74c3c;
+
 }
 
-main{
-	background: #ccc;
-	width: 90%;
-	margin: auto;
+.main{
+	background: #fff;
+	padding: 20px;
 }
 
-.centrar{
-	background: #ccc;
-	width: 90%;
-	margin: auto;
-}
-
-.contenedor2{
-	background: #F8F8F8;
-	width: 90%;
-	margin: auto;
-}
-
-.contenedor2 h1{
-	text-align: center;
+.listas{
+	display: block;
+	list-style: none;
+	padding: 10px 15px;
 }
