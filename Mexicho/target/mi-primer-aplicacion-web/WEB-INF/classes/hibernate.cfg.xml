@@ -7,12 +7,12 @@
     <!-- Database Connection Settings -->
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/mexicho</property>
-    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.username">postgres</property>
     <property name="show_sql">true</property>
     <!-- Specifying Session Context -->
     <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
     <!-- Mapping With Model Class Containing Annotations -->
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.password">Link11</property>
     <mapping class="com.tuukul.modelo.User"/>
     <mapping class="com.tuukul.modelo.Tema"/>
   </session-factory>

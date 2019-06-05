@@ -7,27 +7,27 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import com.tuukul.modelo.Usuario;
-import com.tuukul.modelo.UtilidadUsuario;
+import com.tuukul.modelo.User;
+import com.tuukul.modelo.Utility;
 import java.util.Random;
 
 @ManagedBean
 @RequestScoped
 public class RegisterController {
     private Random rn = new Random();
-    private Usuario user = new Usuario();
-    private UtilidadUsuario u = new UtilidadUsuario();
+    private User user = new User();
+    private Utility u = new Utility();
 
     public RegisterController() {
         FacesContext.getCurrentInstance()
                 .getViewRoot()
                 .setLocale(new Locale("es-Mx"));
     }
-    public Usuario getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Usuario user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -44,6 +44,7 @@ public class RegisterController {
                                     "Felicidades, el registro se ha realizado correctamente", ""));
 	    user.setId_usuario(u.generaId());
 	    user.setRol("Comentarista");
+	    user.setUrl_imagen("Ninguna");
 	    u.save(user);
             user = null;
         }
@@ -64,6 +65,7 @@ public class RegisterController {
             user.setContrasena(generaContrasenia());
 	    user.setId_usuario(u.generaId());
 	    user.setRol("Informador");
+	    user.setUrl_imagen("Ninguna");
             u.save(user);
             user = null;
         }
@@ -91,42 +93,5 @@ public class RegisterController {
                                 "El usuario se eliminó con éxito", ""));
 
     }      
-    
-    public String verificaDatos() throws Exception{
-        Usuario us;
-        String resultado;
-        try{
-            us = u.verificaDatos(user);
-            if(us != null){
-                FacesContext.getCurrentInstance().getExternalContext()
-                        .getSessionMap().put("usuario", us);
-                resultado = "exito";
-            }else{
-                resultado = "error";
-            }
-        }
-        catch(Exception e){
-            throw e;
-        }
-        return resultado;
-    }
-
-    public boolean verificaSesion(){
-        boolean estado;
-        
-        if(FacesContext.getCurrentInstance().getExternalContext()
-            .getSessionMap().get("usuario") == null){
-            estado = false;
-        }else{
-            estado = true;
-        }
-      return estado;
-    }
-    
-    public String cerrarSesion(){
-        FacesContext.getCurrentInstance().getExternalContext().
-                invalidateSession();
-        return "index";
-    }
 
 }
